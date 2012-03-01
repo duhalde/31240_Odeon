@@ -1,0 +1,10 @@
+\section{Odeon} % (fold)
+\label{sec:odeon}
+The Odeon software is a widely used tool for modeling the acoustics of a room. It primarely uses ray-based simulations. A 3d-model is loaded into the software. The room models should be made very simple keeping small details to a minimum.\\
+Since Odeon uses statistical models for calculating the sound field it is only valid for frequencies above the Schroeder Frequency. This frequency depends on the volume and the reverberation time of a room. For very large concert halls and theaters this frequency is close to 20~Hz. This means that the models are usable for all frequencies in the audible range.\\
+The Schroeder frequency for the `Østre Gasværk' with an estimated volume of aproximately $29\cdot 10^{3}$~m^{3} and a reverberation time of 1.4~s yields
+\[
+f_{s}=2000\sqrt{\frac{T_{60}}{V}}=14 \text{ Hz}
+\]
+Which is well below the audible range. Which is why we use Odeon to examine the sound field for all frequencies.
+% section odeon (end)

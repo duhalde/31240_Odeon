@@ -1,0 +1,39 @@
+\section{Exercise 0} % (fold)
+\label{sec:exercise0}
+The model of the auditorium was created in Google Sketchup. This is a simple modelling tool making use of drawing 2D-shapes and extruding them into the room. Using Google Sketcup was quite easy and most of the time was spent learning by watching the available introduction videos.\\
+\subsection{Difficulties}
+The main difficulty was with drawing the audience seating area. Drawing a skewered reactangle led to different solutions within the group. It would have been nice with general guidelines to the technique  used when drawing a room with inventory.\\
+The use of layers could have been stressed especially since in apparently is the only way to group surfaces in Odeon. 
+
+% section experimental_setup (end)
+
+\section{Exercise 1} % (fold)
+\label{sec:exercise1}
+The aim of the second part of this exercise is to improve the reverberation time of the provided model of \O stre Gasv\ae rk. The task is to reduce the reverberation time to T $\approx 1.4$~s, by analyzing the reflections in Odeon and adding absorbing materials to critical surfaces.
+\subsection{Locating the problem}
+First we remove the proscenium wall and the reflector above the scene (or rather make them transparent by setting material = 0). Then we run Ray Tracing and get the reverberation time from Global estimate.
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+\hline
+Band [Hz]   &       63    &   125   &    250    &   500  &    1000   &   2000   &   4000  & 8000 \\
+T(30)  [s]   &   2,96   &   2,94  &    5,08   &   5,32   &   5,60  &    4,53  &    2,90  &    1,22 \\
+\hline
+\end{tabular}
+\end{center}
+
+This is quite bad considering the fact that this room is intended to be used for music and theatre. 
+
+It is clear from the reverberation times that we need to put in a lot of absorption in order to get near the goal of T = 1.4 s. It is however not irrelevant where we put the absorbing material because some surfaces are more dominant reflectors than others. Luckily we can locate the origin of reflections as function of delay time in Odeon. Two groups of reflections cluster around 70ms and 230ms. The early reflections arrive primarily from the ceiling and the late from the ceiling (after the first reflection has hit the ceiling and bounced off the floor behind the audience). 
+
+So the main concern for our improvements are on the ceiling and floors. 
+\subsection{Improvements}
+First of all, we model the room by adding audience to the tribunes. This `material' acts as a scatter and quite good absorber especially at high frequencies ($\alpha_{\text{low}}\approx 0.5$ and $\alpha_{\text{high}}\approx 0.8$).
+
+However this is not enough to lower the reverberation time and the strong reflections are still causing an audible echo. In our improvements we want to add two types of absorbers. 
+\begin{itemize}
+\item Thin porous material suspended in front of hard wall. Generally porous materials are good absorbers at high frequencies but quite poor at low frequencies. By suspending the porous material from the hard wall, an air gap is created and the resulting absorption coefficient is almost constant over the frequency range, see figure 1.7 \cite[p. 10]{Rindel1981absorbers}).
+\item Wooden panels in front of a cavity will generally give modest reverberation at low frequencies. By placing the wooden panels on the floor, a large surface area is covered in order to lower the reverberation time at low frequencies.
+\end{itemize}
+In addition we look specifically at the reflection with a time delay of 70 ms. Figure 2.4-2.9 in \cite[pp. 8-11]{Gade2003room} show the desired values of the relative level of the reflected signal in order to avoid echoes in music and speech. If the absorbers are not able to dampen the reflections at 70 ms it can be necessary to add e.g. diffusers or reflectors to dampen these early reflections.
+
